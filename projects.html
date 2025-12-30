@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="/js/global.js" defer></script>
+
+<nav>
+
+  <a class="btn" href="index.html">Home</a>
+</nav>
+
+<header class="glass">
+<center>
+  <h2>WORLD BEST COMPUTRONIX – CYBER TOOLS</h2>
+</center>
+</header>
+
+
+
+<!-- ================= CYBER STYLE ================= -->
+<style>
+body{
+  margin:0;
+  background:#000;
+  color:#39ff14;
+  font-family:"Courier New",monospace;
+  transition:all .3s;
+}
+
+h1{
+  text-align:center;
+  margin:30px 0;
+  text-shadow:0 0 15px #0ff;
+}
+
+.tools-container{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:30px;
+  padding:30px;
+}
+
+.converter{
+  width:420px;
+  padding:25px;
+  background:rgba(0,0,0,.85);
+  border-radius:16px;
+  box-shadow:0 0 25px #39ff14;
+  text-align:center;
+  transition:.2s;
+}
+
+.converter:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 40px #0ff;
+}
+
+input,textarea,button{
+  width:90%;
+  margin:8px;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  font-family:"Courier New",monospace;
+}
+
+textarea{
+  background:#000;
+  color:#39ff14;
+  border:1px solid #39ff14;
+}
+
+button{
+  background:#39ff14;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{background:#0ff}
+
+.status{
+  min-height:20px;
+  margin-top:8px;
+  text-shadow:0 0 10px #0ff;
+}
+
+#qrCanvas{
+  margin-top:10px;
+}
+
+@media(max-width:480px){
+  .converter{width:90%;}
+}
+</style>
+
+<!-- ================= LIBRARIES ================= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+
+<div class="tools-container">
+
+<!-- IMAGES → PDF -->
+<div class="converter">
+<h3>Images → PDF</h3>
+<input type="file" id="imgInput" multiple accept="image/*">
+<button onclick="imgToPdf()">Convert</button>
+<div class="status" id="imgStatus"></div>
+</div>
+
+<!-- PDF → Images -->
+<div class="converter">
+<h3>PDF → Images</h3>
+<input type="file" id="pdfInput" accept="application/pdf">
+<button onclick="pdfToImg()">Extract</button>
+<div class="status" id="pdfStatus"></div>
+</div>
+
+<!-- TEXT → SPEECH -->
+<div class="converter">
+<h3>Text → Speech</h3>
+<textarea id="ttsText" rows="4"></textarea>
+<button onclick="speak()">Speak</button>
+</div>
+
+<!-- QR GENERATOR -->
+<div class="converter">
+<h3>QR Code Generator</h3>
+<input type="text" id="qrText">
+<button onclick="genQR()">Generate</button>
+<div id="qrCanvas"></div>
+</div>
+
+<!-- COLOR PICKER -->
+<div class="converter">
+<h3>Color Picker</h3>
+<input type="color" id="colorPick">
+<div id="colorBox" style="width:60px;height:60px;border:2px solid #39ff14;margin:auto"></div>
+</div>
+
+<!-- PASSWORD GENERATOR -->
+<div class="converter">
+<h3>Password Generator</h3>
+<input type="number" id="passLen" value="16">
+<button onclick="genPass()">Generate</button>
+<input id="passOut" readonly>
+</div>
+
+<!-- BASE64 -->
+<div class="converter">
+<h3>Base64 Encode / Decode</h3>
+<textarea id="b64in" rows="3"></textarea>
+<button onclick="b64enc()">Encode</button>
+<button onclick="b64dec()">Decode</button>
+<textarea id="b64out" rows="3" readonly></textarea>
+</div>
+
+<!-- JSON FORMATTER -->
+<div class="converter">
+<h3>JSON Formatter</h3>
+<textarea id="jsonIn" rows="4"></textarea>
+<button onclick="formatJSON()">Format</button>
+<textarea id="jsonOut" rows="4" readonly></textarea>
+</div>
+
+<!-- URL ENCODE -->
+<div class="converter">
+<h3>URL Encode / Decode</h3>
+<input id="urlIn">
+<button onclick="urlEnc()">Encode</button>
+<button onclick="urlDec()">Decode</button>
+<input id="urlOut" readonly>
+</div>
+
+<!-- MARKDOWN -->
+<div class="converter">
+<h3>Markdown Preview</h3>
+<textarea id="mdIn" rows="4"></textarea>
+<div id="mdOut" style="background:#111;padding:10px"></div>
+</div>
+
+</div>
+
+<!-- ================= LOGIC ================= -->
+<script>
+const {jsPDF}=window.jspdf;
+
+// Images → PDF
+async function imgToPdf(){
+ const files=imgInput.files;
+ if(!files.length) return;
+ const pdf=new jsPDF();
+ for(let i=0;i<files.length;i++){
+  const img=await new Promise(r=>{
+   const fr=new FileReader();
+   fr.onload=e=>{
+    const im=new Image();
+    im.onload=()=>r(im);
+    im.src=e.target.result;
+   };
+   fr.readAsDataURL(files[i]);
+  });
+  if(i) pdf.addPage();
+  const w=pdf.internal.pageSize.getWidth();
+  pdf.addImage(img,"PNG",0,0,w,img.height*w/img.width);
+ }
+ pdf.save("images.pdf");
+ imgStatus.innerText="Done ✔";
+}
+
+// PDF → Images
+async function pdfToImg(){
+ const file=pdfInput.files[0];
+ if(!file) return;
+ const pdf=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;
+ const zip=new JSZip();
+ for(let i=1;i<=pdf.numPages;i++){
+  const p=await pdf.getPage(i);
+  const v=p.getViewport({scale:2});
+  const c=document.createElement("canvas");
+  c.width=v.width;c.height=v.height;
+  await p.render({canvasContext:c.getContext("2d"),viewport:v}).promise;
+  zip.file(`page${i}.png`,await new Promise(r=>c.toBlob(r)));
+ }
+ const blob=await zip.generateAsync({type:"blob"});
+ Object.assign(document.createElement("a"),{href:URL.createObjectURL(blob),download:"pages.zip"}).click();
+ pdfStatus.innerText="Done ✔";
+}
+
+// Text → Speech
+function speak(){
+ speechSynthesis.speak(new SpeechSynthesisUtterance(ttsText.value));
+}
+
+// QR
+function genQR(){
+ qrCanvas.innerHTML="";
+ new QRCode(qrCanvas,{text:qrText.value,width:150,height:150});
+}
+
+// Color
+colorPick.oninput=()=>colorBox.style.background=colorPick.value;
+
+// Password
+function genPass(){
+ const c="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$";
+ passOut.value=Array.from({length:passLen.value},()=>c[Math.floor(Math.random()*c.length)]).join("");
+}
+
+// Base64
+function b64enc(){b64out.value=btoa(b64in.value)}
+function b64dec(){try{b64out.value=atob(b64in.value)}catch{b64out.value="Invalid"}}
+
+// JSON
+function formatJSON(){
+ try{jsonOut.value=JSON.stringify(JSON.parse(jsonIn.value),null,2)}
+ catch{jsonOut.value="Invalid JSON"}
+}
+
+// URL
+function urlEnc(){urlOut.value=encodeURIComponent(urlIn.value)}
+function urlDec(){urlOut.value=decodeURIComponent(urlIn.value)}
+
+// Markdown
+mdIn.oninput=()=>mdOut.innerHTML=marked(mdIn.value);
+</script>
+
+
+
+
+
+<!-- Ad placeholder -->
+<div class="ad-banner">
+  <p>🛡 Cybersecurity Learning Resource Placeholder 🛡</p>
+</div>
+</body>
+</html>
+
+
+
+
+

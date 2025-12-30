@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity Portfolio</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- CSP Header -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://cdn.jsdelivr.net;">
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<script src="particles.js" defer></script>
+</head>
+
+<body oncontextmenu="return false;">
+
+<div class="cursor"></div>
+<!-- Background Video -->
+<video autoplay muted loop id="bg-video">
+  <source src="cyber-bg.mp4" type="video/mp4">
+</video>
+
+<!-- Watermark -->
+<div class="watermark"></div>
+
+<!-- License Overlay -->
+<div id="license-overlay">
+  <div id="license-box">
+    <h2>⚠ License Notice</h2>
+    <p>This portfolio is protected.<br>Educational & competition use only.<br>Unauthorized copying is prohibited.</p>
+    <button id="license-btn">I Understand</button>
+  </div>
+</div>
+
+<!-- Navigation -->
+<nav>
+  <a class="btn" href="index.html">Home</a>
+  <a class="btn" href="projects.html">Projects</a>
+  <a class="btn" href="achievements.html">Achievements</a>
+  <a class="btn" href="about.html">About</a>
+  <a class="btn" href="contact.html">contact us</a>
+  <button id="toggle">🌗</button>
+</nav>
+
+<header class="hero">
+<h1>WELCOME TO</h1>
+  <h1>WORLD BEST COMPUTRONIX</h1>
+  <h2>I'M RAJESH</h2>
+  <p class="subtitle" data-en="Cybersecurity Specialist • Ethical Hacking • Web Security • AI Awareness"></p>
+  <div id="terminal"></div>
+  <a href="resume.html" class="btn">⬇ SHOW CV</a>
+</header>
+
+
+<div class="ad-banner">
+  <p>🛡 Cybersecurity Learning Resource Placeholder 🛡</p>
+</div>
+
+<section class="glass">
+  <h2 data-en="Skills"></h2>
+  <div class="skills">
+    <span>Network Security</span>
+    <span>Ethical Hacking</span>
+    <span>Web Security</span>
+    <span>JavaScript</span>
+    <span>Three.js</span>
+    <span>AI Awareness</span>
+    <span>Cyber Threat Analysis</span>
+  </div>
+</section>
+
+<div id="chatbot">
+  <div id="chat-log"></div>
+  <input id="chat-input" placeholder="Ask the AI..." />
+</div>
+
+<input type="text" id="hp-admin" style="display:none" autocomplete="off">
+
+<footer id="footer"></footer>
+
+<script src="script.js"></script>
+<script src="chatbot.js"></script>
+
+<!-- Navigation -->
+<nav>
+  <a class="btn" href="index.html">Home</a>
+  <a class="btn" href="projects.html">Projects</a>
+  <a class="btn" href="achievements.html">Achievements</a>
+  <a class="btn" href="about.html">About</a>
+  <a class="btn" href="contact.html">contact us</a>
+</nav>
+
+</body>
+</html>

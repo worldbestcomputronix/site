@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+<nav>
+  <a class="btn" href="index.html">Home</a>
+</nav>
+<title>Rajesh | Cybersecurity Operator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Share Tech Mono',monospace;
+  background:black;
+  color:#00ff99;
+  overflow-x:hidden;
+}
+
+/* INTRO SCREEN */
+#intro{
+  position:fixed;
+  inset:0;
+  background:black;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+#intro h1{
+  animation:glitch 1.5s infinite;
+}
+@keyframes glitch{
+  0%{text-shadow:2px 0 red}
+  50%{text-shadow:-2px 0 cyan}
+  100%{text-shadow:2px 0 lime}
+}
+
+/* MATRIX */
+canvas{position:fixed;top:0;left:0;z-index:-1}
+
+/* LAYOUT */
+.container{max-width:1000px;margin:auto;padding:20px}
+.section{
+  border:2px solid #00ff99;
+  box-shadow:0 0 15px #00ff99;
+  padding:20px;
+  margin-bottom:25px;
+  background:rgba(0,0,0,.85);
+}
+h1,h2{text-shadow:0 0 10px #00ff99;margin-bottom:10px}
+ul{list-style:"➜ ";margin-left:20px}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+.card{
+  border:1px solid #00ff99;
+  padding:15px;
+  transition:.3s;
+}
+.card:hover{
+  background:#00ff9911;
+  transform:scale(1.03);
+}
+
+/* PHOTO */
+.photo{
+  width:140px;
+  height:170px;
+  border:2px solid #00ff99;
+  float:right;
+  object-fit:cover;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+.photo{float:none;display:block;margin:auto}
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro"><h1>ACCESSING SECURE SYSTEM...</h1></div>
+<canvas id="matrix"></canvas>
+
+<div class="container">
+
+<h1>🛡 CYBER OPERATOR :: RAJESH</h1>
+
+<div class="section">
+<img src="photo.png" class="photo">
+<p>[ROLE] Cybersecurity / IT Support</p>
+<p>[LOCATION] Delhi, India</p>
+<p>[CONTACT] +91 8826713583</p>
+<p>[EMAIL] WORLDBESTCOMPUTRONIX@gmail.com</p>
+</div>
+
+<!-- PENTEST DASHBOARD -->
+<div class="section">
+<h2>🧪 PENETRATION TEST DASHBOARD</h2>
+<ul>
+<li>Firewall Status: ACTIVE</li>
+<li>Open Ports: 0 Critical</li>
+<li>Malware Scan: CLEAN</li>
+<li>System Integrity: 100%</li>
+<li>Threat Level: LOW</li>
+</ul>
+</div>
+
+<!-- CYBER TOOLS -->
+<div class="section">
+<h2>🔒 CYBERSECURITY TOOLS</h2>
+<div class="cards">
+<div class="card">🛰 Nmap<br>Network Scanning</div>
+<div class="card">📡 Wireshark<br>Packet Analysis</div>
+<div class="card">🧱 Firewall<br>Endpoint Protection</div>
+<div class="card">🦠 Antivirus<br>Threat Removal</div>
+</div>
+</div>
+
+<!-- SKILLS -->
+<div class="section">
+<h2>💻 TECHNICAL SKILLS</h2>
+<ul>
+<li>Windows XP / 7 / 8 / 10 / 11</li>
+<li>Hardware Diagnostics & Repair</li>
+<li>Virus Removal & Protection</li>
+<li>Network Cable (Straight / Cross)</li>
+<li>Printer & File Sharing</li>
+</ul>
+</div>
+
+<!-- PORTFOLIO -->
+<div class="section">
+<h2>🌍 PROJECTS / PORTFOLIO</h2>
+<div class="cards">
+<div class="card">🔐 Secure Office Network Setup</div>
+<div class="card">🖥 AMC System Maintenance</div>
+<div class="card">🧪 Virus Cleanup Operations</div>
+<div class="card">📊 Accounting Systems (Tally)</div>
+</div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section">
+<h2>🛠 EXPERIENCE</h2>
+<ul>
+<li>Lenovo Service Centre – 6 Months</li>
+<li>Bsoft India – 6 Months</li>
+<li>Ocean Computronix – 3 Years</li>
+<li>Hardware Maintenance – 2 Years</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>✔ SYSTEM STATUS</h2>
+<p>ACCESS GRANTED | READY FOR DEPLOYMENT</p>
+</div>
+
+</div>
+
+<!-- MATRIX SCRIPT -->
+<script>
+const c=document.getElementById("matrix"),ctx=c.getContext("2d");
+c.width=innerWidth;c.height=innerHeight;
+const chars="01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const drops=Array(Math.floor(c.width/16)).fill(1);
+function draw(){
+ctx.fillStyle="rgba(0,0,0,0.05)";
+ctx.fillRect(0,0,c.width,c.height);
+ctx.fillStyle="#00ff99";ctx.font="16px monospace";
+drops.forEach((y,i)=>{
+const t=chars[Math.floor(Math.random()*chars.length)];
+ctx.fillText(t,i*16,y*16);
+if(y*16>c.height&&Math.random()>0.975)drops[i]=0;
+drops[i]++;
+});
+}
+setInterval(draw,33);
+
+/* INTRO HIDE */
+setTimeout(()=>document.getElementById("intro").style.display="none",2500);
+</script>
+<script>
+  // Disable right-click + show warning
+  document.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+    showAccessDenied();
+  });
+
+  // Block common inspect shortcuts (basic deterrent)
+  document.addEventListener("keydown", function (e) {
+    const key = e.key.toLowerCase();
+
+    if (
+      key === "f12" ||
+      (e.ctrlKey && e.shiftKey && (key === "i" || key === "j")) ||
+      (e.ctrlKey && key === "u")
+    ) {
+      e.preventDefault();
+      showAccessDenied();
+    }
+  });
+
+  function showAccessDenied() {
+    // Prevent multiple popups
+    if (document.getElementById("access-denied-popup")) return;
+
+    const popup = document.createElement("div");
+    popup.id = "access-denied-popup";
+    popup.textContent = "⚠ ACCESS DENIED";
+
+    Object.assign(popup.style, {
+      position: "fixed",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      padding: "20px 40px",
+      background: "black",
+      color: "#39ff14",
+      border: "2px solid #39ff14",
+      boxShadow: "0 0 30px #39ff14",
+      zIndex: "100000",
+      fontSize: "1.5rem",
+      borderRadius: "20px",
+      fontFamily: "monospace"
+    });
+
+    document.body.appendChild(popup);
+
+    setTimeout(() => popup.remove(), 1500);
+  }
+</script>
+<nav>
+  <a class="btn" href="index.html">Home</a>
+</nav>
+</body>
+</html>
+<!-- ================= NEON/GLITCH LIGHT/DARK TOGGLE ================= -->
+<button id="themeToggle" class="neon-btn">🌙</button>
+
+<style>
+.neon-btn{
+  position:fixed;
+  top:10px;
+  right:10px;
+  background:#000;
+  color:#39ff14;
+  padding:12px 18px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:1.2rem;
+  z-index:9999;
+  text-shadow:
+     0 0 5px #39ff14,
+     0 0 10px #39ff14,
+     0 0 20px #0ff,
+     0 0 30px #0ff;
+  box-shadow:
+     0 0 5px #39ff14,
+     0 0 10px #39ff14,
+     0 0 20px #0ff,
+     0 0 30px #0ff;
+  animation: flicker 2s infinite;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover effect to float and intensify glow */
+.neon-btn:hover{
+  transform: translateY(-5px) scale(1.1);
+  text-shadow:
+     0 0 10px #39ff14,
+     0 0 20px #39ff14,
+     0 0 30px #0ff,
+     0 0 40px #0ff;
+  box-shadow:
+     0 0 10px #39ff14,
+     0 0 20px #39ff14,
+     0 0 30px #0ff,
+     0 0 40px #0ff;
+}
+
+/* Flicker animation */
+@keyframes flicker{
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100%{
+    opacity:1;
+    text-shadow:
+       0 0 5px #39ff14,
+       0 0 10px #39ff14,
+       0 0 20px #0ff,
+       0 0 30px #0ff;
+  }
+  20%, 24%, 55%{
+    opacity:0.8;
+    text-shadow:none;
+  }
+}
+</style>
+
+<script>
+themeToggle.onclick = () => document.body.classList.toggle("light");
+</script>
+

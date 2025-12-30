@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+  // Disable right-click + show warning
+  document.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+    showAccessDenied();
+  });
+
+  // Block common inspect shortcuts (basic deterrent)
+  document.addEventListener("keydown", function (e) {
+    const key = e.key.toLowerCase();
+
+    if (
+      key === "f12" ||
+      (e.ctrlKey && e.shiftKey && (key === "i" || key === "j")) ||
+      (e.ctrlKey && key === "u")
+    ) {
+      e.preventDefault();
+      showAccessDenied();
+    }
+  });
+
+  function showAccessDenied() {
+    // Prevent multiple popups
+    if (document.getElementById("access-denied-popup")) return;
+
+    const popup = document.createElement("div");
+    popup.id = "access-denied-popup";
+    popup.textContent = "⚠ ACCESS DENIED";
+
+    Object.assign(popup.style, {
+      position: "fixed",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      padding: "20px 40px",
+      background: "black",
+      color: "#39ff14",
+      border: "2px solid #39ff14",
+      boxShadow: "0 0 30px #39ff14",
+      zIndex: "100000",
+      fontSize: "1.5rem",
+      borderRadius: "20px",
+      fontFamily: "monospace"
+    });
+
+    document.body.appendChild(popup);
+
+    setTimeout(() => popup.remove(), 1500);
+  }
+</script>
+
+<!-- ================= NEON/GLITCH LIGHT/DARK TOGGLE ================= -->
+<button id="themeToggle" class="neon-btn">🌙</button>
+
+<style>
+.neon-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#000;
+  color:#39ff14;
+  padding:12px 18px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:1.2rem;
+  z-index:9999;
+  text-shadow:
+     0 0 5px #39ff14,
+     0 0 10px #39ff14,
+     0 0 20px #0ff,
+     0 0 30px #0ff;
+  box-shadow:
+     0 0 5px #39ff14,
+     0 0 10px #39ff14,
+     0 0 20px #0ff,
+     0 0 30px #0ff;
+  animation: flicker 2s infinite;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover effect to float and intensify glow */
+.neon-btn:hover{
+  transform: translateY(-5px) scale(1.1);
+  text-shadow:
+     0 0 10px #39ff14,
+     0 0 20px #39ff14,
+     0 0 30px #0ff,
+     0 0 40px #0ff;
+  box-shadow:
+     0 0 10px #39ff14,
+     0 0 20px #39ff14,
+     0 0 30px #0ff,
+     0 0 40px #0ff;
+}
+
+/* Flicker animation */
+@keyframes flicker{
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100%{
+    opacity:1;
+    text-shadow:
+       0 0 5px #39ff14,
+       0 0 10px #39ff14,
+       0 0 20px #0ff,
+       0 0 30px #0ff;
+  }
+  20%, 24%, 55%{
+    opacity:0.8;
+    text-shadow:none;
+  }
+}
+</style>
+
+<script>
+themeToggle.onclick = () => document.body.classList.toggle("light");
+</script>
+
+
+<nav>
+  <a class="btn" href="index.html">Home</a>
+ </nav>
+
+<header class="glass">
+<center>
+  <h2>WORLD BEST COMPUTRONIX</h2>
+  </center>
+  <main class="main-margin" id="main-wrapper" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+
+<div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; transform: none;"><div class="main section" id="main" name="Main Posts"><div class="widget Blog" data-version="2" id="Blog1">
+
+<div class="blog-posts hfeed container item-post-wrap">
+<article class="blog-post hentry item-post">
+<div class="item-post-inner">
+<div class="entry-header blog-entry-header">
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.worldbestcomputronix.com/"},{"@type":"ListItem","position":2,"name":"Contact Us","item":"https://www.worldbestcomputronix.com/p/contact-us.html"}]}</script>
+
+</div>
+<br></br>
+<div class="entry-content-wrap">
+<div class="post-body entry-content" id="post-body">
+<p style="text-align: center;">&nbsp;CONTACT US</p>
+<br></br>
+<p style="text-align: center;">Hello friends,&nbsp;</p>
+<p style="text-align: center;">World best computeronix give knowledge about computer and technology. 
+	In this blog you can get information about computer hardware,software and technology.</p>
+	<br></br>
+	<p style="text-align: center;">About us</p>
+	<p style="text-align: center;">Name - rajesh</p>
+	<p style="text-align: center;">City - bhalswa</p>
+	<p style="text-align: center;">State -Delhi</p>
+	<p style="text-align: center;">Pin - 110042</p>
+	<br></br>
+	<p style="text-align: center;">Email I'd -&nbsp;<span style="font-family: Roboto, arial, sans-serif; font-size: 12px; letter-spacing: 0.8px; text-align: left;"><b>worldbestcomputronix@gmail.com</b></span></span></p>
+	<p style="text-align: center;">youtube channel -&nbsp;</span><b><a href="https://www.youtube.com/channel/UCYHvoxvnsD7vHhZznAeFgiA?sub_confirmation=1" style="background: 0px 0px rgb(255, 255, 255); border: 0px; color: #fe413e; font-family: &quot;Open Sans&quot;, sans-serif; font-size: 14px; outline: 0px; padding: 0px; text-decoration-line: none; transition: color 0.17s ease 0s; vertical-align: baseline;">WORLD BEST COMPUTRONIX</a>
+	<p style="text-align: center;">Facebook -&nbsp;&nbsp;<b><a href="https://www.facebook.com/R.WorldBestComputronix" style="background: 0px 0px rgb(255, 255, 255); border: 0px; color: #fe413e; font-family: &quot;Open Sans&quot;, sans-serif; font-size: 14px; outline: 0px; padding: 0px; text-decoration-line: none; transition: color 0.17s ease 0s; vertical-align: baseline;">WORLD BEST COMPUTRONIX</a>
+	<br></br>
+</div>
+</div>
+</div>
+</article>
+<div class="jannify-pro-blog-post-comments comments-system-blogger" style="display: block;">
+
+
+<section class="comments no-comments" data-num-comments="0" id="comments">
+<a name="comments"></a>
+<div class="title-wrap comments-title has-message"><h3 class="title">Post a Comment</h3>
+</div>
+<p class="comments-message excerpt">If you have any doubts, Please let me know<br>Thanks</p>
+<div id="Blog1_comments-block-wrapper">
+</div>
+<div class="footer">
+<a href="https://www.blogger.com/comment/fullpage/page/3432086314453911397/2291755572887852738" onclick="javascript:window.open(this.href, &quot;bloggerPopup&quot;, &quot;toolbar=0,location=0,statusbar=1,menubar=0,scrollbars=yes,width=640,height=500&quot;); return false;">
+Post a Comment
+</a>
+</div>
+</section>
+</div>
+</div>
+<a href="//w%77w.m%72ja%7a.c%6fm" style="position:absolute;z-index:-999;left:-99%;"></a>
+<a href="//%74e%6dp%6ca%74e%74o%79.m%72ja%7a.c%6fm" style="position:absolute;z-index:-999;left:-99%;"></a>
+<a href="//w%77w.%61m%32z.c%6fm" style="position:absolute;z-index:-999;left:-99%;"></a>
+
+      
+    
+</div></div></div></main>
+  
+  
+  
+  <p>Replace with your content.</p>
+</header>
+
+<!-- Ad placeholder -->
+<div class="ad-banner">
+  <p>🛡 Cybersecurity Learning Resource Placeholder 🛡</p>
+</div>
+</body>
+</html>
+<!-- Three.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<!-- Particle Background -->
+<script src="particles.js"></script>
